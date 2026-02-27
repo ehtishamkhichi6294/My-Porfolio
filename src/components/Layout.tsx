@@ -1,25 +1,14 @@
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Github, Linkedin, Mail, Facebook } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'motion/react';
+import { ReactNode } from 'react';
+import { Github, Linkedin, MessageCircle, Twitter, Instagram, Facebook, Briefcase } from 'lucide-react';
 
-export default function Layout() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+interface LayoutProps {
+  children: ReactNode;
+}
+
+export function Layout({ children }: LayoutProps) {
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -29,120 +18,126 @@ export default function Layout() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col relative">
-      {/* Background Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 bg-black">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-red-600/10 blur-[150px] animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-red-900/10 blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-red-500/30 overflow-x-hidden relative">
+      {/* Advanced Glassmorphism Background Elements */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-red-600/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-red-900/10 blur-[120px]" />
+        <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-red-500/5 blur-[100px]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
       </div>
 
-      {/* Navbar */}
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'glass-nav py-4' : 'bg-transparent py-6'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold tracking-tighter text-white hover:text-red-500 transition-colors glow-text">
-            Portfolio<span className="text-red-600">.</span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-white ${
-                  location.pathname === link.path ? 'text-white' : 'text-gray-400'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <a 
-              href="mailto:ehtishamkhichi5@gmail.com" 
-              className="shiny-btn px-6 py-2.5 rounded-full text-white text-sm font-medium transition-all"
-            >
-              Let's Talk
-            </a>
-          </nav>
-
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Nav */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 right-0 glass border-t border-white/10 p-6 flex flex-col gap-4 md:hidden"
-            >
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+            <Link to="/" className="text-xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 hover:to-white transition-all duration-300">
+              EK.
+            </Link>
+            
+            <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-lg font-medium transition-colors ${
-                    location.pathname === link.path ? 'text-white' : 'text-gray-400'
+                  className={`text-sm font-medium transition-all duration-300 hover:text-white relative ${
+                    location.pathname === link.path ? 'text-white' : 'text-white/60'
+                  }`}
+                >
+                  {link.name}
+                  {location.pathname === link.path && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-red-500 to-red-800"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            <a 
+              href="https://wa.me/923286717879" 
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-white/10 border border-white/10 rounded-xl hover:bg-[#25D366]/20 hover:border-[#25D366]/50 hover:scale-105 transition-all duration-300 backdrop-blur-md"
+            >
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp
+            </a>
+
+            {/* Mobile Menu Button - simplified for this example */}
+            <div className="md:hidden flex items-center space-x-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-xs font-medium ${
+                    location.pathname === link.path ? 'text-white' : 'text-white/60'
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Main Content */}
-      <main className="flex-grow z-10 pt-24">
-        <Outlet />
+      <main className="relative z-10 pt-32 pb-20 px-6 min-h-screen flex flex-col">
+        <div className="max-w-5xl mx-auto w-full flex-grow">
+          {children}
+        </div>
       </main>
 
       {/* Footer */}
-      <footer className="z-10 glass border-t border-white/10 mt-20 relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-red-600/50 to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-          <div className="text-center md:text-left">
-            <Link to="/" className="text-xl font-bold tracking-tighter text-white glow-text">
-              Portfolio<span className="text-red-600">.</span>
-            </Link>
-            <p className="text-gray-400 mt-2 text-sm">
-              Building digital experiences with modern web technologies.
+      <footer className="relative z-10 border-t border-white/10 bg-black/40 backdrop-blur-lg mt-auto">
+        <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col items-center md:items-start">
+            <span className="text-xl font-bold tracking-tighter text-white mb-2">Ehtisham Khichi</span>
+            <p className="text-sm text-white/50 text-center md:text-left max-w-xs">
+              Building digital experiences with modern web technologies and advanced UI/UX design.
             </p>
           </div>
-
-          <div className="flex items-center gap-6">
-            <a href="https://github.com/ehtishamkhichi6294" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Github size={20} />
+          
+          <div className="flex flex-wrap items-center gap-4 justify-center md:justify-end">
+            <a href="https://github.com/ehtishamkhichi6294" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="GitHub">
+              <Github className="w-5 h-5" />
             </a>
-            <a href="https://www.linkedin.com/in/ehtisham-khichi-73323a370/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Linkedin size={20} />
+            <a href="https://www.linkedin.com/in/ehtisham-khichi-73323a370/" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="LinkedIn Profile">
+              <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://www.facebook.com/profile.php?id=61588588627903" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Facebook size={20} />
+            <a href="https://www.linkedin.com/services/page/8a8630342531136799/" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="LinkedIn Services">
+              <Briefcase className="w-5 h-5" />
             </a>
-            <a href="mailto:ehtishamkhichi5@gmail.com" className="text-gray-400 hover:text-white transition-colors">
-              <Mail size={20} />
+            <a href="https://x.com/EhtishamKhichi5" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="X (Twitter)">
+              <Twitter className="w-5 h-5" />
+            </a>
+            <a href="https://www.instagram.com/ehtishamkhichi/" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="Instagram">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61560308903632" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="Facebook Profile 1">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61588588627903" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-red-500/30 hover:scale-110 transition-all duration-300" title="Facebook Profile 2">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="https://wa.me/923286717879" target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-[#25D366] hover:bg-white/10 hover:border-[#25D366]/30 hover:scale-110 transition-all duration-300" title="WhatsApp">
+              <MessageCircle className="w-5 h-5" />
             </a>
           </div>
         </div>
-        <div className="border-t border-white/5 py-6 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-center items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
-          <span className="hidden md:inline text-gray-700">|</span>
-          <Link to="/sitemap" className="hover:text-gray-300 transition-colors">Sitemap</Link>
+        <div className="border-t border-white/5 py-6 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
+          <p className="text-xs text-white/40">
+            © {new Date().getFullYear()} Ehtisham Khichi. All rights reserved.
+          </p>
+          <Link to="/sitemap" className="text-xs text-white/40 hover:text-white transition-colors">
+            Sitemap
+          </Link>
         </div>
       </footer>
     </div>
   );
 }
-
-// Need to import AnimatePresence at the top
