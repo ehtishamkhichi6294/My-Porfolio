@@ -44,10 +44,10 @@ export function Projects() {
       <div className="flex flex-col gap-24 py-12">
         <section>
           <FadeIn direction="up">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40 mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40 mb-8">
               Selected Work.
             </h1>
-            <p className="text-xl text-white/60 max-w-2xl mb-16">
+            <p className="text-lg md:text-xl text-white/60 max-w-2xl mb-16">
               A collection of projects that showcase my passion for building beautiful, functional, and user-centered digital products.
             </p>
           </FadeIn>

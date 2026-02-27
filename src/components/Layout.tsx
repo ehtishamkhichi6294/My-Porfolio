@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { ReactNode } from 'react';
-import { Github, Linkedin, MessageCircle, Twitter, Instagram, Facebook, Briefcase } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ReactNode, useState, useEffect } from 'react';
+import { Github, Linkedin, MessageCircle, Twitter, Instagram, Facebook, Briefcase, Menu, X } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +9,12 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -30,7 +36,7 @@ export function Layout({ children }: LayoutProps) {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
         <div className="max-w-5xl mx-auto">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] relative">
             <Link to="/" className="text-xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 hover:to-white transition-all duration-300">
               EK.
             </Link>
@@ -67,20 +73,50 @@ export function Layout({ children }: LayoutProps) {
               WhatsApp
             </a>
 
-            {/* Mobile Menu Button - simplified for this example */}
-            <div className="md:hidden flex items-center space-x-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-xs font-medium ${
-                    location.pathname === link.path ? 'text-white' : 'text-white/60'
-                  }`}
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 right-0 mt-4 p-4 bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl md:hidden flex flex-col gap-2"
                 >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className={`p-4 rounded-xl text-center font-medium transition-colors ${
+                        location.pathname === link.path 
+                          ? 'bg-red-500/20 text-red-400' 
+                          : 'text-white/70 hover:bg-white/5 hover:text-white'
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <a 
+                    href="https://wa.me/923286717879" 
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2 p-4 mt-2 font-medium text-white bg-[#25D366]/20 border border-[#25D366]/30 rounded-xl hover:bg-[#25D366]/30 transition-colors"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    WhatsApp
+                  </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </nav>

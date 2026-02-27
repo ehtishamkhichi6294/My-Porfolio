@@ -15,8 +15,8 @@ export function Home() {
       
       <div className="flex flex-col gap-32">
         {/* Hero Section */}
-        <section className="min-h-[80vh] flex flex-col md:flex-row justify-center items-center gap-12 relative">
-          <div className="flex-1 flex flex-col items-start">
+        <section className="min-h-[80vh] flex flex-col lg:flex-row justify-center items-center gap-12 relative pt-12 lg:pt-0">
+          <div className="flex-1 flex flex-col items-start w-full">
             <FadeIn delay={0.1} direction="up">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-medium mb-8 backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -24,8 +24,8 @@ export function Home() {
               </div>
             </FadeIn>
             
-            <FadeIn delay={0.2} direction="up">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/40 mb-6 leading-[1.1]">
+            <FadeIn delay={0.2} direction="up" className="w-full">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/40 mb-6 leading-[1.1] break-words">
                 Crafting digital <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">experiences.</span>
               </h1>
@@ -58,10 +58,10 @@ export function Home() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.3} direction="left" className="flex-1 flex justify-center items-center relative hidden md:flex">
-            <div className="relative w-80 h-80 rounded-full flex items-center justify-center group">
+          <FadeIn delay={0.3} direction="left" className="flex-1 flex justify-center items-center relative mt-12 lg:mt-0 w-full">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full flex items-center justify-center group">
               {/* Image */}
-              <div className="w-64 h-64 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-red-500/50 transition-colors duration-500 relative z-10 bg-black">
+              <div className="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-red-500/50 transition-colors duration-500 relative z-10 bg-black">
                 <img 
                   src="https://i.postimg.cc/rwp3Lrk3/Ek122.png" 
                   alt="Ehtisham Khichi" 

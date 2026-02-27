@@ -47,8 +47,8 @@ export function About() {
       
       <div className="flex flex-col gap-24 py-12">
         <section>
-          <FadeIn direction="up" className="flex justify-between items-end mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40">
+          <FadeIn direction="up" className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40">
               About Me.
             </h1>
             <button 

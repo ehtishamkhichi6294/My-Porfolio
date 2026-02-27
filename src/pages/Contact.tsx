@@ -90,10 +90,10 @@ export function Contact() {
       <div className="flex flex-col gap-24 py-12">
         <section>
           <FadeIn direction="up">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40 mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40 mb-8">
               Let's Talk.
             </h1>
-            <p className="text-xl text-white/60 max-w-2xl mb-16">
+            <p className="text-lg md:text-xl text-white/60 max-w-2xl mb-16">
               I'm currently available for freelance work and open to new opportunities. Reach out if you have a project in mind or just want to say hi.
             </p>
           </FadeIn>
@@ -106,7 +106,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Email</h3>
-                  <a href="mailto:ehtishamkhichi5@gmail.com" className="text-white/60 hover:text-red-400 transition-colors text-lg">
+                  <a href="mailto:ehtishamkhichi5@gmail.com" className="text-white/60 hover:text-red-400 transition-colors text-base sm:text-lg break-all">
                     ehtishamkhichi5@gmail.com
                   </a>
                 </div>
@@ -118,7 +118,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Phone</h3>
-                  <a href="tel:+923286717879" className="text-white/60 hover:text-red-400 transition-colors text-lg">
+                  <a href="tel:+923286717879" className="text-white/60 hover:text-red-400 transition-colors text-base sm:text-lg">
                     +92 328 6717879
                   </a>
                 </div>
@@ -130,7 +130,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">WhatsApp</h3>
-                  <a href="https://wa.me/923286717879" target="_blank" rel="noreferrer" className="text-white/60 hover:text-[#25D366] transition-colors text-lg">
+                  <a href="https://wa.me/923286717879" target="_blank" rel="noreferrer" className="text-white/60 hover:text-[#25D366] transition-colors text-base sm:text-lg">
                     +92 328 6717879
                   </a>
                 </div>
@@ -142,7 +142,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Location</h3>
-                  <p className="text-white/60 text-lg">
+                  <p className="text-white/60 text-base sm:text-lg">
                     Faisalabad, Pakistan
                   </p>
                 </div>
