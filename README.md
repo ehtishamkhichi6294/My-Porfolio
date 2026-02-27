@@ -3,7 +3,7 @@
 A modern, responsive, and high-performance portfolio website built with React, Vite, Tailwind CSS, and Framer Motion. The website features a sophisticated dark theme with red accents, advanced glassmorphism effects, and smooth page transitions.
 
 ## 🌐 Live Preview
-[View Live Site](#) *(Replace with your deployed URL)*
+[View Live Site](https://ehtishamkhichi.netlify.app)
 
 ## ✨ Features
 
